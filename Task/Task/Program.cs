@@ -1,25 +1,19 @@
 ﻿char t;
-do { 
+do {
+Console.WriteLine("Введите количество строк массива");
 var input1 = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов массива");
 var input2 = Convert.ToInt32(Console.ReadLine());
 var mass = new int[input1][];
-var mass2 = new int[input1][];
 var number1 = 0;
 var number2 = 0;
+Console.WriteLine("Введите элементы массива");
 for (int i = 0; i < input1; i++)
 {
     mass[i] = new int[input2];
     for (int j = 0; j < input2; j++)
     {
         mass[i][j] = Convert.ToInt32(Console.ReadLine());
-        if (mass[i][j] > 0) 
-        {
-            number1++;        
-        }
-        else
-        {
-            number2++;
-        }
     }
 }
 foreach (var i in mass)
@@ -30,12 +24,33 @@ foreach (var i in mass)
     }
     Console.WriteLine();
 };
-    do { 
+    do {
+        Console.WriteLine("Выберите действие которое необходимо сделать \n" +
+            "1) Вывести количество положительных и отрицательных элементов массива \n" +
+            "2) Отсортировать каждую строку массива от меньшего элемента к большему \n" +
+            "3) Отсортировать каждую строку массива от большего элемента к меньщему \n" +
+            "4) Выполнить инверсию массива, то есть поменять первую и последнюю строку, вторую и предпоследнюю и т.д.");
         var choice = Convert.ToInt32(Console.ReadLine());
         switch (choice)
         {
             case (1):
-                Console.WriteLine($"{number1} {number2}");
+                for (int i = 0; i < input1; i++)
+                {
+                    for (int j = 0; j < input2; j++)
+                    {
+                        if (mass[i][j] > 0)
+                        {
+                            number1++;
+                        }
+                        else
+                        {
+                            number2++;
+                        }
+                    }
+
+                }
+                Console.WriteLine($"Количество положительных чисел {number1}");
+                Console.WriteLine($"Количество отрицательных чисел {number2}");
                 break;
             case (2):
                 for (int i = 0; i < input1; i++)
@@ -51,36 +66,33 @@ foreach (var i in mass)
                 }
                 break;
             case (4):
-                for (int i = 0, k = input1 - 1; i < input1; i++, k--)
+                Console.WriteLine("Измененный массив выглядит так");
+                for (int i = input1 - 1; i >= 0; i--)
                 {
-                    for (int j = 0, m = input2 - 1; j < input2; j++, m--)
+                    var n = mass[i];
+                    for(int j = 0; j < input2; j++)
                     {
-                        mass2[i][j] = mass[k][m];
-                        Console.Write(" " + mass2[i][j] + " ");
+                        Console.Write($"{n[j]}    ");
                     }
+                    Console.WriteLine();
                 }
-
-                /*for (int i = input1-1; i <= 0; i--)
-                {
-                        mass = mass[i];
-                }*/
                 break;
-
-                /*default:
-                Console.WriteLine();
-                break;*/
         }
-        foreach (var i in mass)
+        if(choice != 4 && choice != 1)
         {
-            foreach (var j in i)
+            Console.WriteLine("Измененный массив выглядит так");
+            foreach (var i in mass)
             {
-                Console.Write($"{j}    ");
-            }
-            Console.WriteLine();
-        };
-        Console.WriteLine("Нажмите f чтобы выйти из массива");
+                foreach (var j in i)
+                {
+                    Console.Write($"{j}    ");
+                }
+                Console.WriteLine();
+            };
+        }
+        Console.WriteLine("Нажмите f чтобы выйти из массива, иначе нажмите любую другую клавишу и вернитесь к выбору действия");
         t = Convert.ToChar(Console.ReadLine());
         } while (t != 'f');
-        Console.WriteLine("Нажмите f чтобы выйти из программы");
+        Console.WriteLine("Нажмите f чтобы выйти из программы, иначе нажмите любую другую клавишу и вернитесь к вводу массива");
     t = Convert.ToChar(Console.ReadLine());
 } while (t != 'f') ;
