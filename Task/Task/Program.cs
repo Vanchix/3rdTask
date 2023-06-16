@@ -53,9 +53,19 @@ foreach (var i in mass)
                 Console.WriteLine($"Количество отрицательных чисел {number2}");
                 break;
             case (2):
+                var k = 0;
                 for (int i = 0; i < input1; i++)
                 {
-                    Array.Sort(mass[i]);
+                    for(int j = 0; j < input2; j++)
+                    {
+                        for(int sort = 0; sort < input2 - 1; sort++)
+                        if (mass[i][sort] > mass[i][sort + 1])
+                        {
+                            k = mass[i][sort + 1];
+                            mass[i][j + 1] = mass[i][sort];
+                            mass[i][sort] = k;
+                        }
+                    }
                 }
                 break;
             case (3):
